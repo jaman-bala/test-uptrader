@@ -1,0 +1,83 @@
+{% extends  'base.html'%}
+{% load static %}
+
+{% block content %}
+
+<div class="header-title ken-burn white" data-parallax="scroll" data-bleed="0" data-position="top"
+         data-natural-height="850" data-natural-width="1920" data-image-src="{% static 'images/bg-23.jpg'%}">
+        <div class="container">
+            <div class="title-base">
+                <hr class="anima"/>
+                <h1>Наше меню</h1>
+                <p>Большой ассортимент позиций</p>
+            </div>
+        </div>
+    </div>
+    <div class="section-bg-image parallax-window" data-bleed="0" data-natural-height="2500" data-natural-width="1920"
+         data-parallax="scroll" data-image-src="{% static 'images/hd-portrait-2.jpg'%}">
+        <div class="container content">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="scroll-box" data-bottom="150">
+                        <aside id="menu" class="sidebar mi-menu">
+                            <nav class="sidebar-nav">
+                                <ul class="side-menu">
+                                    <p class="font-2">
+                                        Выберите пункт в меню
+                                    </p>
+                                    {% for category in categories %}
+                                    <li>
+                                        <a href="#{{category.id}}">
+                                            <i class="im-clock-8"></i>
+                                            {{category.title_category}}
+                                        </a>
+                                    </li>
+                                    {% endfor %}
+
+                                </ul>
+                            </nav>
+                        </aside>
+                    </div>
+                </div>
+
+                <div class="col-md-9">
+                    {% for category in categories %}
+                    <h3 id="{{category.id}}" class="text-black">{{category.title_category}}</h3>
+                    <div class="maso-list list-sm-6 col-margins">
+                        <div class="navbar navbar-inner">
+                            <div class="navbar-toggle">
+                                <i class="fa fa-bars"></i>
+                                <span>МЕНЮ</span>
+                                <i class="fa fa-angle-down"></i>
+                            </div>
+                            <div class="collapse navbar-collapse">
+                            </div>
+                        </div>
+                        <div class="maso-box row" data-lightbox-anima="fade-top">
+                            {% for product in products %}
+                            {% if product.category.title_category == category.title_category %}
+                            <div data-sort="1" class="maso-item col-md-6 cat2">
+                                <div class="img-box adv-img adv-img-full-content">
+                                    <div class="img-box">
+                                        <img src="{{product.image.url}}" alt="">
+                                    </div>
+                                        <div class="caption">
+                                            <div class="inner">
+                                                <h2>{{product.title}}</h2>
+                                                <p class="sub"> {{product.description|safe}} </p>
+                                                <p class="sub"> {{product.price}} </p>
+                                            </div>
+                                        </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% endfor %}
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
